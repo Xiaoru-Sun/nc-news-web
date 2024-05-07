@@ -214,6 +214,21 @@ img {
 .loading {
   text-align: center;
 }
+
+/* CommentList, CommentCard*/
+
+.commentcard-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.commentcard-list {
+  justify-items: start;
+  height: auto;
+}
+
 /*from previous */
 button {
   border-radius: 8px;
