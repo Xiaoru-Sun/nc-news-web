@@ -1,0 +1,232 @@
+:root {
+  font-family: Helvetica, Inter, system-ui, Avenir, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(15, 2, 2, 0.87);
+  background-color: whitesmoke;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 300;
+  color: rgba(15, 2, 2, 0.87);
+  text-decoration: inherit;
+}
+
+nav > ul > li a:hover {
+  background-color: lightgrey;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/*Navigator Component */
+#navigator {
+  display: flex;
+  border: 1px solid black;
+  align-items: start;
+  justify-content: space-evenly;
+}
+ul {
+  list-style-type: none;
+  border: 1px solid black;
+}
+/* nav > ul > li {
+  margin: 0 5px;
+} */
+
+/*Header*/
+
+header {
+  display: flex;
+  border: 1px solid black;
+  justify-content: space-between;
+}
+
+header > h3 {
+  margin-left: 20px;
+  margin-top: 25px;
+}
+
+#header-signin {
+  border-radius: 15px;
+  margin: 20px 30px;
+  height: 35px;
+  width: 80px;
+  font-size: small;
+  font-weight: bold;
+  background-color: rgb(241, 168, 31);
+}
+
+.tooltip {
+  margin-left: 25px;
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 170px;
+  background-color: rgb(103, 102, 102);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -85px;
+  font-size: x-small;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/*Article Card*/
+
+.articlecard-item:hover {
+  background-color: rgb(231, 227, 227);
+}
+
+.articlecard-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.articlecard-item {
+  flex: auto;
+  width: 100%;
+  max-width: 450px;
+  padding: 0 10px;
+  margin: 20px auto;
+  border: 1px solid green;
+}
+
+.artilecard-title {
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.artilecard-header {
+  font-size: x-small;
+  text-align: left;
+  padding: 0 5px;
+}
+
+#articlecard-topic {
+  font-weight: bold;
+}
+
+.articlecard-buttom {
+  font-size: small;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.articlecard-buttom > button {
+  width: 70px;
+  padding: 5px 0;
+  margin: 0 8px;
+}
+
+/*Article List */
+
+.articlelist-top {
+  display: flex;
+  flex-direction: start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.articlelist-label {
+  font-size: small;
+  padding: 0 2px;
+  margin-right: 5px;
+}
+
+.articlelist-top > .page {
+  margin: 0 20px;
+}
+
+#articleslist-apply {
+  height: 30px;
+  font-size: small;
+}
+
+/* Login*/
+#signin-section {
+  background-color: whitesmoke;
+  width: 300px;
+  padding: 20px;
+  margin-top: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  border: 15px;
+}
+
+#signin-button {
+  background-color: rgb(248, 160, 8);
+  height: 30px;
+  width: 240px;
+  padding: 8px;
+  margin-top: 15px;
+  font-size: small;
+}
+
+#signin-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 0;
+}
+#signin-input {
+  margin-left: 10px;
+  width: 230px;
+  display: block;
+  margin-left: 0;
+  height: 20px;
+}
+
+#signin-policy {
+  font-size: xx-small;
+  width: 240px;
+}
+
+#signin-h2 {
+  margin: 0px auto 10px auto;
+}
+
+/*from previous */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: lightgrey;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
