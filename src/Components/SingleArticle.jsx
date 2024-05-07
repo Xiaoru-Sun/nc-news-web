@@ -6,6 +6,7 @@ import moment from "moment";
 import Votes from "./Votes";
 import Expandable from "./Expandable";
 import CommentList from "./CommentList";
+import { fetchSingleArtile } from "../utils/app";
 
 function SingleArticle() {
   const { article_id } = useParams();
@@ -16,23 +17,8 @@ function SingleArticle() {
   const createdDateFromNow = moment(createdDate, "MMM Do YY").fromNow();
 
   useEffect(() => {
-    fetchSingleArtile();
+    fetchSingleArtile(article_id, setLoading, setArticle, setError);
   }, [article_id]);
-
-  const fetchSingleArtile = () => {
-    setLoading(true);
-    axios
-      .get(
-        `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}`
-      )
-      .then((res) => {
-        setLoading(false);
-        setArticle(res.data.article);
-      })
-      .catch(() => {
-        setError(true);
-      });
-  };
 
   return (
     <>
@@ -53,7 +39,7 @@ function SingleArticle() {
       {error && <p>Error!</p>}
       <Votes></Votes>
       <Expandable>
-        <CommentList></CommentList>
+        <CommentList article_id={article_id}></CommentList>
       </Expandable>
     </>
   );

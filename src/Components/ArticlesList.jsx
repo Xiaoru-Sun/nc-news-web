@@ -1,24 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard.jsx";
+import ReactLoading from "react-loading";
+import { fetchAllArticles } from "../utils/app.js";
 
 function ArticlesList() {
   const [allArticles, setAllArticles] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("https://project-nc-news-xiaoru-sun.onrender.com/api/articles")
-      .then((res) => {
-        setAllArticles(res.data.articles);
-      })
-      .catch(() => {
-        setError(true);
-      });
+    fetchAllArticles(setLoading, setAllArticles, setError);
   }, []);
 
   return (
     <>
+      {loading && (
+        <ReactLoading
+          className="loading"
+          type="spinningBubbles"
+          color="blue"
+        ></ReactLoading>
+      )}
+
       <div className="articlelist-top">
         <div className="articleslist-query sort-by">
           <label className="articlelist-label">Sort by</label>
@@ -49,6 +53,7 @@ function ArticlesList() {
           );
         })}
       </ul>
+      {error && <p>Error!</p>}
     </>
   );
 }
