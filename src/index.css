@@ -211,6 +211,9 @@ img {
   margin: 0px auto 10px auto;
 }
 
+.loading {
+  text-align: center;
+}
 /*from previous */
 button {
   border-radius: 8px;
