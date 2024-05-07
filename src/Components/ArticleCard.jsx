@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 function ArticleCard(props) {
   const { article } = props;
@@ -18,8 +19,12 @@ function ArticleCard(props) {
             {moment(createdDate, "MMM Do YY").fromNow()}
           </p>
         </div>
-        <h4 className="artilecard-title">{article.title}</h4>
-        <img alt="img of article" src={article.article_img_url}></img>
+        <Link to={`/articles/${article.article_id}`}>
+          <h4 className="artilecard-title">{article.title}</h4>
+        </Link>
+        <Link to={`/articles/${article.article_id}`}>
+          <img alt="img of article" src={article.article_img_url}></img>
+        </Link>
       </article>
       <div className="articlecard-buttom">
         <button>

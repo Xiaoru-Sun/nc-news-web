@@ -6,6 +6,7 @@ import Home from "./Components/Home";
 import Navigator from "./Components/Navigator";
 import Login from "./Components/Login";
 import { useState } from "react";
+import SingleArticle from "./Components/SingleArticle";
 
 function App() {
   const [onLogin, setOnLogin] = useState(false);
@@ -23,6 +24,7 @@ function App() {
             <Login setOnLogin={setOnLogin} setAppLoggedin={setAppLoggedin} />
           }
         ></Route>
+        <Route path="/articles/:article_id" element={<SingleArticle />}></Route>
       </Routes>
     </>
   );
