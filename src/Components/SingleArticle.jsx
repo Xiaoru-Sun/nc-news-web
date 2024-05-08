@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import ReactLoading from "react-loading";
 import moment from "moment";
 import Votes from "./Votes";
@@ -22,6 +21,7 @@ function SingleArticle() {
 
   return (
     <>
+      {error && <p>Error!</p>}
       {loading && (
         <ReactLoading
           className="loading"
@@ -29,18 +29,21 @@ function SingleArticle() {
           color="blue"
         ></ReactLoading>
       )}
-      <article>
-        <p>{article.author}</p>
-        <p>{createdDateFromNow}</p>
-        <h3>{article.title}</h3>
-        <img src={article.article_img_url}></img>
-        <p>{article.body}</p>
-      </article>
-      {error && <p>Error!</p>}
-      <Votes></Votes>
-      <Expandable>
-        <CommentList article_id={article_id}></CommentList>
-      </Expandable>
+      {Object.keys(article).length > 0 && (
+        <>
+          <article>
+            <p>{article.author}</p>
+            <p>{createdDateFromNow}</p>
+            <h3>{article.title}</h3>
+            <img src={article.article_img_url}></img>
+            <p>{article.body}</p>
+          </article>
+          <Votes article={article}></Votes>
+          <Expandable>
+            <CommentList article_id={article_id}></CommentList>
+          </Expandable>
+        </>
+      )}
     </>
   );
 }
