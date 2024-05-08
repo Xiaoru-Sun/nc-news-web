@@ -60,3 +60,17 @@ export const patchArticleVote = (article, voteChange) => {
     { inc_votes: voteChange }
   );
 };
+
+export const postComment = (article_id, userName, comment) => {
+  console.log("in postComment function", article_id, {
+    username: userName,
+    body: comment,
+  });
+  return axios.post(
+    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}/comments`,
+    {
+      username: userName,
+      body: comment,
+    }
+  );
+};
