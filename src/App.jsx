@@ -13,7 +13,7 @@ function App() {
   const [appLogin, setAppLoggedin] = useState(false);
   return (
     <>
-      {!onLogin && <Header></Header>}
+      {!onLogin && <Header setOnLogin={setOnLogin}></Header>}
       {!onLogin && <Navigator></Navigator>}
       <Routes>
         <Route path="/" element={<Home />}></Route>

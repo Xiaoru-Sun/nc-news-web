@@ -7,7 +7,7 @@ function CommentCard(props) {
     <>
       <p>{comment.author}</p>
       <p>{comment.body}</p>
-      <Votes></Votes>
+      {/* <Votes></Votes> */}
     </>
   );
 }
