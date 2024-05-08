@@ -1,26 +1,54 @@
 import { useState } from "react";
+import { patchArticleVote } from "../utils/app";
 
-function Votes() {
-  const [votesNum, setVotesNum] = useState(0);
+function Votes(props) {
+  const { article } = props;
+  const [displayVoteNum, setDisplayVoteNum] = useState(article.votes);
   const [voteTimes, setVoteTimes] = useState(0);
   const [unvoteTimes, setUnvoteTimes] = useState(0);
+  const [error, setError] = useState(false);
+  const [voteOnServerUpdated, setVoteOnServerUpdated] = useState(false);
+
+  const handlePatch = (voteChange) => {
+    patchArticleVote(article, voteChange)
+      .then((res) => {
+        setVoteOnServerUpdated(true);
+        setTimeout(() => {
+          setVoteOnServerUpdated(false);
+        }, 1000);
+      })
+      .catch(() => {
+        setError(true);
+      });
+  };
 
   const incrementVotes = () => {
+    //to disable the vote button
     setVoteTimes(1);
-    setVotesNum(votesNum + 1);
+    //update the UI right away
+    setDisplayVoteNum(displayVoteNum + 1);
+    //send request to server that responds with res.data.updatedArticle
+    handlePatch(1);
   };
 
   const decreaseVotes = () => {
     setUnvoteTimes(1);
-    setVotesNum(votesNum - 1);
+    setDisplayVoteNum(displayVoteNum - 1);
+    handlePatch(-1);
   };
 
   return (
     <div>
+      {voteOnServerUpdated && <p>Vote updated successfully!</p>}
+      {error && (
+        <p>Error! please refress the page and press the button again</p>
+      )}
       <button
         className="upvote"
-        onClick={incrementVotes}
-        disabled={voteTimes === 1}
+        onClick={() => {
+          incrementVotes();
+        }}
+        disabled={voteTimes === 1 && !error}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,11 +71,13 @@ function Votes() {
         </svg>
       </button>
 
-      <span>{votesNum}</span>
+      <span>{displayVoteNum}</span>
       <button
         className="downvote"
-        onClick={decreaseVotes}
-        disabled={unvoteTimes === 1}
+        onClick={() => {
+          decreaseVotes();
+        }}
+        disabled={unvoteTimes === 1 && !error}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

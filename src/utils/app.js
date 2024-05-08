@@ -1,4 +1,5 @@
 import axios from "axios";
+import Votes from "../Components/Votes";
 
 export const fetchAllArticles = (setLoading, setAllArticles, setError) => {
   setLoading(true);
@@ -51,4 +52,11 @@ export const fetchComments = (
     .catch(() => {
       setError(true);
     });
+};
+
+export const patchArticleVote = (article, voteChange) => {
+  return axios.patch(
+    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article.article_id}`,
+    { inc_votes: voteChange }
+  );
 };
