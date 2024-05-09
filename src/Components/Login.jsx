@@ -1,33 +1,53 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { UserLoginContext } from "../Contexts/UserLogin";
 
 function Login(props) {
   const [userName, setUsername] = useState("");
   const [displayUserName, setDisplayUserName] = useState("");
-  const [isLoggedin, setLoggedin] = useState(false);
   const [error, setError] = useState(false);
-  const { setAppLoggedin, setOnLogin } = props;
+  const [allUsers, setAllUsers] = useState([]);
+  const { userLoggedin, setUserLoggedin, setAccountName } =
+    useContext(UserLoginContext);
+  const { setOnLogin } = props;
 
-  setOnLogin(true);
+  useEffect(() => {
+    console.log("log allUsers in useEffect", allUsers);
+  }, [allUsers]);
+
+  useEffect(() => {
+    // Check if allUsers is not empty
+    if (allUsers.length > 0 && userName) {
+      if (allUsers.includes(userName)) {
+        setUserLoggedin(true);
+        setAccountName(userName);
+        setOnLogin(false);
+        // Perform actions for valid user
+      } else {
+        setError(true);
+        // Perform actions for invalid user
+      }
+    }
+  }, [allUsers, userName]);
 
   const handleSignIn = () => {
     axios
-      .get(
-        `https://project-nc-news-xiaoru-sun.onrender.com/api/users/${userName}`
-      )
+      .get(`https://project-nc-news-xiaoru-sun.onrender.com/api/users`)
       .then((res) => {
-        console.log(res);
-        setLoggedin(true);
-        setAppLoggedin(true);
+        let allNames = res.data.users.map((obj) => obj.username);
+        setAllUsers((preAllUsers) => {
+          const currAllUsers = [...preAllUsers, ...allNames];
+          return currAllUsers;
+        });
       })
       .catch((err) => {
+        console.error(err);
         setError(true);
       });
   };
 
-  if (isLoggedin) {
-    setOnLogin(false);
+  if (userLoggedin) {
     return (
       <>
         <p>{userName} is signed in!</p>

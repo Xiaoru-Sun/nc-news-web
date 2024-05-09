@@ -74,3 +74,9 @@ export const postComment = (article_id, userName, comment) => {
     }
   );
 };
+
+export const deleteComment = (comment_id) => {
+  axios.delete(
+    `https://project-nc-news-xiaoru-sun.onrender.com/api/comments/${comment_id}`
+  );
+};
