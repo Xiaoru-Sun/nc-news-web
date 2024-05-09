@@ -5,6 +5,9 @@ import ArticlesList from "./Components/ArticlesList";
 import Home from "./Components/Home";
 import Navigator from "./Components/Navigator";
 import Login from "./Components/Login";
+import Coding from "./Components/Coding";
+import Cooking from "./Components/Cooking";
+import Football from "./Components/Football";
 import { useState } from "react";
 import SingleArticle from "./Components/SingleArticle";
 import { UserLoginProvider } from "./Contexts/UserLogin";
@@ -28,6 +31,9 @@ function App() {
             path="/articles/:article_id"
             element={<SingleArticle />}
           ></Route>
+          <Route path="/coding" element={<Coding />}></Route>
+          <Route path="/cooking" element={<Cooking />}></Route>
+          <Route path="/football" element={<Football />}></Route>
         </Routes>
       </UserLoginProvider>
     </>

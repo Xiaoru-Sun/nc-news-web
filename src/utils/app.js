@@ -76,7 +76,13 @@ export const postComment = (article_id, userName, comment) => {
 };
 
 export const deleteComment = (comment_id) => {
-  axios.delete(
+  return axios.delete(
     `https://project-nc-news-xiaoru-sun.onrender.com/api/comments/${comment_id}`
+  );
+};
+
+export const fetchArticlesByTopic = (topic) => {
+  return axios.get(
+    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/?topic=${topic}`
   );
 };

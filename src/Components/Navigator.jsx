@@ -6,16 +6,24 @@ function Navigator() {
       <nav>
         <ul id="navigator">
           <li>
-            <Link className="cursor-pointer">Home</Link>
+            <Link className="cursor-pointer" to="/">
+              Home
+            </Link>
           </li>
           <li>
-            <Link className="cursor-pointer">Coding</Link>
+            <Link className="cursor-pointer" to="/coding">
+              Coding
+            </Link>
           </li>
           <li>
-            <Link className="cursor-pointer">Football</Link>
+            <Link className="cursor-pointer" to="/football">
+              Football
+            </Link>
           </li>
           <li>
-            <Link className="cursor-pointer">Cooking</Link>
+            <Link className="cursor-pointer" to="/cooking">
+              Cooking
+            </Link>
           </li>
         </ul>
       </nav>
