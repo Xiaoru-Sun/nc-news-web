@@ -1,7 +1,10 @@
 import { Link, Navigate } from "react-router-dom";
+import { UserLoginContext } from "../Contexts/UserLogin";
+import { useContext } from "react";
 
 function Header(props) {
   const { setOnLogin } = props;
+  const { userLoggedin, accountName } = useContext(UserLoginContext);
 
   const handleLogin = () => {
     setOnLogin(true);
@@ -17,15 +20,18 @@ function Header(props) {
             <span className="tooltiptext">Go to Homepage</span>
           </h3>
         </Link>
-        <Link to="/log-in">
-          <button
-            type="button"
-            id="header-signin"
-            onClick={() => handleLogin()}
-          >
-            Log in
-          </button>
-        </Link>
+        {!userLoggedin && (
+          <Link to="/log-in">
+            <button
+              type="button"
+              id="header-signin"
+              onClick={() => handleLogin()}
+            >
+              Log In
+            </button>
+          </Link>
+        )}
+        {userLoggedin && <p>Hello {accountName}</p>}
       </header>
     </>
   );
