@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchArticlesByTopic } from "../utils/app";
 import ArticleCard from "./ArticleCard";
 import ReactLoading from "react-loading";
-const [loading, setLoading] = useState(false);
 
 function Cooking() {
   const [cookingArticles, setCookingArticles] = useState([]);
   const [error, setError] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     fetchArticlesByTopic("cooking")
