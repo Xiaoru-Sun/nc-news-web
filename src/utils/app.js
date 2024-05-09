@@ -4,7 +4,8 @@ import Votes from "../Components/Votes";
 export const fetchAllArticles = (setLoading, sortby, order) => {
   setLoading(true);
   return axios.get(
-    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles?sort_by=${sortby}&&order=${order}`
+    "https://project-nc-news-xiaoru-sun.onrender.com/api/articles",
+    { params: { sort_by: sortby, order: order } }
   );
 };
 
@@ -77,6 +78,11 @@ export const deleteComment = (comment_id) => {
 
 export const fetchArticlesByTopic = (topic) => {
   return axios.get(
-    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/?topic=${topic}`
+    "https://project-nc-news-xiaoru-sun.onrender.com/api/articles",
+    {
+      params: {
+        topic: topic,
+      },
+    }
   );
 };
