@@ -8,10 +8,16 @@ function CommentCard(props) {
   const { accountName } = useContext(UserLoginContext);
 
   const [commentDeleted, setCommentDeleted] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleDelete = () => {
-    setCommentDeleted(true);
-    deleteComment(comment.comment_id);
+    deleteComment(comment.comment_id)
+      .then(() => {
+        setCommentDeleted(true);
+      })
+      .catch((err) => {
+        setError(true);
+      });
   };
 
   return (
