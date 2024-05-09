@@ -7,6 +7,7 @@ function Cooking() {
   const [cookingArticles, setCookingArticles] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     fetchArticlesByTopic("cooking")

@@ -1,17 +1,11 @@
 import axios from "axios";
 import Votes from "../Components/Votes";
 
-export const fetchAllArticles = (setLoading, setAllArticles, setError) => {
+export const fetchAllArticles = (setLoading, sortby, order) => {
   setLoading(true);
-  axios
-    .get("https://project-nc-news-xiaoru-sun.onrender.com/api/articles")
-    .then((res) => {
-      setLoading(false);
-      setAllArticles(res.data.articles);
-    })
-    .catch(() => {
-      setError(true);
-    });
+  return axios.get(
+    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles?sort_by=${sortby}&&order=${order}`
+  );
 };
 
 export const fetchSingleArtile = (

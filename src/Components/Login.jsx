@@ -12,9 +12,7 @@ function Login(props) {
     useContext(UserLoginContext);
   const { setOnLogin } = props;
 
-  useEffect(() => {
-    console.log("log allUsers in useEffect", allUsers);
-  }, [allUsers]);
+  useEffect(() => {}, [allUsers]);
 
   useEffect(() => {
     // Check if allUsers is not empty
