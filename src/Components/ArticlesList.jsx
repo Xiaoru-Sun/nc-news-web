@@ -3,15 +3,36 @@ import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard.jsx";
 import ReactLoading from "react-loading";
 import { fetchAllArticles } from "../utils/app.js";
+import { useSearchParams } from "react-router-dom";
 
 function ArticlesList() {
   const [allArticles, setAllArticles] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [sortby, setSortby] = useState("created_at");
+  const [order, setOrder] = useState("DESC");
+  const [query, setQuery] = useState({ sort_by: "created_at", order: "DESC" });
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleQuery = () => {
+    setQuery((preQuery) => ({ ...preQuery, sort_by: sortby, order: order }));
+    setSearchParams((preParams) => ({
+      ...preParams,
+      sort_by: sortby,
+      order: order,
+    }));
+  };
 
   useEffect(() => {
-    fetchAllArticles(setLoading, setAllArticles, setError);
-  }, []);
+    fetchAllArticles(setLoading, sortby, order)
+      .then((res) => {
+        setLoading(false);
+        setAllArticles(res.data.articles);
+      })
+      .catch(() => {
+        setError(true);
+      });
+  }, [query]);
 
   return (
     <>
@@ -26,11 +47,25 @@ function ArticlesList() {
       <div className="articlelist-top">
         <div className="articleslist-query sort-by">
           <label className="articlelist-label">Sort by</label>
-          <select>
-            <option id="option1">Sort by</option>
-            <option>New</option>
-            <option>Old</option>
-            <option>Comments</option>
+          <select
+            onChange={(e) => {
+              setSortby(e.target.value);
+            }}
+          >
+            <option value="created_at">Date</option>
+            <option value="votes">Votes</option>
+            <option value="comment_count">Comments</option>
+          </select>
+        </div>
+        <div>
+          <label>Order</label>
+          <select
+            onChange={(e) => {
+              setOrder(e.target.value);
+            }}
+          >
+            <option value="DESC">DESC</option>
+            <option value="ASC">ASC</option>
           </select>
         </div>
         <div className="articleslist-query page">
@@ -41,7 +76,9 @@ function ArticlesList() {
             <option>3</option>
           </select>
         </div>
-        <button id="articleslist-apply">Apply</button>
+        <button id="articleslist-apply" onClick={handleQuery}>
+          Apply
+        </button>
       </div>
 
       <ul className="articlecard-container">
