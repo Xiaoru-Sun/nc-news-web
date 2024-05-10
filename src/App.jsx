@@ -11,6 +11,7 @@ import Football from "./Components/Football";
 import { useState } from "react";
 import SingleArticle from "./Components/SingleArticle";
 import { UserLoginProvider } from "./Contexts/UserLogin";
+import ErrorPage from "./Components/ErrorPage";
 
 function App() {
   const [onLogin, setOnLogin] = useState(false);
@@ -34,6 +35,11 @@ function App() {
           <Route path="/coding" element={<Coding />}></Route>
           <Route path="/cooking" element={<Cooking />}></Route>
           <Route path="/football" element={<Football />}></Route>
+          {/* for non-existent path */}
+          <Route
+            path="*"
+            element={<ErrorPage errorMessage="page not found" />}
+          ></Route>
         </Routes>
       </UserLoginProvider>
     </>

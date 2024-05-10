@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { patchArticleVote } from "../utils/app";
+import ErrorPage from "./ErrorPage";
 
 function Votes(props) {
   const { article } = props;
   const [displayVoteNum, setDisplayVoteNum] = useState(article.votes);
   const [voteTimes, setVoteTimes] = useState(0);
   const [unvoteTimes, setUnvoteTimes] = useState(0);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [voteOnServerUpdated, setVoteOnServerUpdated] = useState(false);
 
   const handlePatch = (voteChange) => {
@@ -17,8 +18,8 @@ function Votes(props) {
           setVoteOnServerUpdated(false);
         }, 1000);
       })
-      .catch(() => {
-        setError(true);
+      .catch((error) => {
+        setError({ error });
       });
   };
 
@@ -40,9 +41,7 @@ function Votes(props) {
   return (
     <div>
       {voteOnServerUpdated && <p>Vote updated successfully!</p>}
-      {error && (
-        <p>Error! please refress the page and press the button again</p>
-      )}
+      {error && <ErrorPage errorMessage={error.error.message} />}
       <button
         className="upvote"
         onClick={() => {

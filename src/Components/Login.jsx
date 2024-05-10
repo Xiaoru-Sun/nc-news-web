@@ -2,17 +2,16 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserLoginContext } from "../Contexts/UserLogin";
+import ErrorPage from "./ErrorPage";
 
 function Login(props) {
   const [userName, setUsername] = useState("");
   const [displayUserName, setDisplayUserName] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const { userLoggedin, setUserLoggedin, setAccountName } =
     useContext(UserLoginContext);
   const { setOnLogin } = props;
-
-  useEffect(() => {}, [allUsers]);
 
   useEffect(() => {
     // Check if allUsers is not empty
@@ -23,7 +22,7 @@ function Login(props) {
         setOnLogin(false);
         // Perform actions for valid user
       } else {
-        setError(true);
+        setError({ error: { message: `${displayUserName} is invalid` } });
         // Perform actions for invalid user
       }
     }
@@ -39,9 +38,8 @@ function Login(props) {
           return currAllUsers;
         });
       })
-      .catch((err) => {
-        console.error(err);
-        setError(true);
+      .catch((error) => {
+        setError({ error });
       });
   };
 
@@ -87,7 +85,7 @@ function Login(props) {
           </p>
         </form>
       </section>
-      {error && <p>Username {displayUserName} does not exisit!</p>}
+      {error && <ErrorPage errorMessage={error.error.message} />}
     </div>
   );
 }

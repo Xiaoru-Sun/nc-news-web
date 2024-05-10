@@ -4,10 +4,11 @@ import ArticleCard from "./ArticleCard.jsx";
 import ReactLoading from "react-loading";
 import { fetchAllArticles } from "../utils/app.js";
 import { useSearchParams } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 function ArticlesList() {
   const [allArticles, setAllArticles] = useState([]);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [sortby, setSortby] = useState("created_at");
   const [order, setOrder] = useState("DESC");
@@ -29,8 +30,8 @@ function ArticlesList() {
         setLoading(false);
         setAllArticles(res.data.articles);
       })
-      .catch(() => {
-        setError(true);
+      .catch((error) => {
+        setError({ error });
       });
   }, [query]);
 
@@ -90,7 +91,7 @@ function ArticlesList() {
           );
         })}
       </ul>
-      {error && <p>Error!</p>}
+      {error && <ErrorPage errorMessage={error.error.message} />}
     </>
   );
 }

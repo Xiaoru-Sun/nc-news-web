@@ -1,23 +1,43 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 import CommentCard from "./CommentCard";
 import { fetchComments, postComment } from "../utils/app";
+import ErrorPage from "./ErrorPage";
+import { UserLoginContext } from "../Contexts/UserLogin";
 
 function CommentList(props) {
   const { article_id } = props;
   const [comments, setComments] = useState([]);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [commentInput, setCommentInput] = useState("");
   const [userNameInput, setUserNameInput] = useState("");
   const [postCommentTimes, setPostCommentTimes] = useState(0);
+  const { userLoggedin, accountName } = useContext(UserLoginContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    fetchComments(article_id, setLoading, setComments, setError);
+    fetchComments(article_id, setLoading)
+      .then((res) => {
+        setLoading(false);
+        setComments(res.data.comments);
+      })
+      .catch((error) => {
+        setError({ error });
+      });
   }, [article_id]);
 
-  const handleAddComment = (e) => {
+  const handleAddComment = () => {
+    if (!userLoggedin) {
+      setIsOpen(true);
+    } else {
+      setShowCommentInput(true);
+      setUserNameInput(accountName);
+    }
+  };
+
+  const handleSubmitComment = (e) => {
     e.preventDefault();
     setPostCommentTimes(1);
     postComment(article_id, userNameInput, commentInput)
@@ -27,14 +47,14 @@ function CommentList(props) {
         setUserNameInput("");
         setShowCommentInput(false);
       })
-      .catch(() => {
+      .catch((error) => {
         setPostCommentTimes(0);
-        setError(true);
+        setError({ error });
       });
   };
   return (
     <>
-      {error && <p>Error!</p>}
+      {error && <ErrorPage errorMessage={error.error.message} />}
       {loading && (
         <ReactLoading
           className="loading"
@@ -42,15 +62,27 @@ function CommentList(props) {
           color="blue"
         ></ReactLoading>
       )}
-      <button onClick={() => setShowCommentInput(true)}>Add a comment</button>
-      {showCommentInput && (
-        <form onSubmit={handleAddComment}>
-          <input
-            required
-            type="text"
-            placeholder="please add your username"
-            onChange={(e) => setUserNameInput(e.target.value)}
-          ></input>
+      <button
+        onClick={() => {
+          handleAddComment();
+        }}
+      >
+        Add a comment
+      </button>
+      {isOpen && (
+        <div className="commentlist-popup">
+          <button
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          >
+            Close
+          </button>
+          <p>Please sign in to leave a comment</p>
+        </div>
+      )}
+      {showCommentInput && userLoggedin && (
+        <form onSubmit={handleSubmitComment}>
           <input
             required
             type="text"

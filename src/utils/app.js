@@ -1,5 +1,4 @@
 import axios from "axios";
-import Votes from "../Components/Votes";
 
 export const fetchAllArticles = (setLoading, sortby, order) => {
   setLoading(true);
@@ -9,44 +8,18 @@ export const fetchAllArticles = (setLoading, sortby, order) => {
   );
 };
 
-export const fetchSingleArtile = (
-  article_id,
-  setLoading,
-  setArticle,
-  setError
-) => {
+export const fetchSingleArtile = (article_id, setLoading) => {
   setLoading(true);
-  axios
-    .get(
-      `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}`
-    )
-    .then((res) => {
-      setLoading(false);
-      setArticle(res.data.article);
-    })
-    .catch(() => {
-      setError(true);
-    });
+  return axios.get(
+    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}`
+  );
 };
 
-export const fetchComments = (
-  article_id,
-  setLoading,
-  setComments,
-  setError
-) => {
+export const fetchComments = (article_id, setLoading) => {
   setLoading(true);
-  axios
-    .get(
-      `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}/comments`
-    )
-    .then((res) => {
-      setLoading(false);
-      setComments(res.data.comments);
-    })
-    .catch(() => {
-      setError(true);
-    });
+  return axios.get(
+    `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}/comments`
+  );
 };
 
 export const patchArticleVote = (article, voteChange) => {
@@ -57,10 +30,6 @@ export const patchArticleVote = (article, voteChange) => {
 };
 
 export const postComment = (article_id, userName, comment) => {
-  console.log("in postComment function", article_id, {
-    username: userName,
-    body: comment,
-  });
   return axios.post(
     `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}/comments`,
     {

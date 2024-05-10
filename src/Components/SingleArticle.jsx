@@ -6,22 +6,30 @@ import Votes from "./Votes";
 import Expandable from "./Expandable";
 import CommentList from "./CommentList";
 import { fetchSingleArtile } from "../utils/app";
+import ErrorPage from "./ErrorPage";
 
 function SingleArticle() {
   const { article_id } = useParams();
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(false);
   const createdDate = moment.utc(article.created_at).format("MMM Do YY");
   const createdDateFromNow = moment(createdDate, "MMM Do YY").fromNow();
 
   useEffect(() => {
-    fetchSingleArtile(article_id, setLoading, setArticle, setError);
+    fetchSingleArtile(article_id, setLoading)
+      .then((res) => {
+        setLoading(false);
+        setArticle(res.data.article);
+      })
+      .catch((error) => {
+        setError({ error });
+      });
   }, [article_id]);
 
   return (
     <>
-      {error && <p>Error!</p>}
+      {error && <ErrorPage errorMessage={error.error.message} />}
       {loading && (
         <ReactLoading
           className="loading"
