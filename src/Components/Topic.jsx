@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
 import { fetchArticlesByTopic } from "../utils/app";
-import ArticleCard from "./ArticleCard";
 import ReactLoading from "react-loading";
+import ArticleCard from "./ArticleCard";
 import ErrorPage from "./ErrorPage";
 
-function Football() {
-  const [ftArticles, setFtArticles] = useState([]);
-  const [error, setError] = useState(null);
+function Topic(props) {
+  const { topic } = props;
+  const [articlesOfTopic, setArticlesOfTopic] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoading(true);
-    fetchArticlesByTopic("football")
+    fetchArticlesByTopic(topic)
       .then((res) => {
         setLoading(false);
-        setFtArticles(res.data.articles);
+        setArticlesOfTopic(res.data.articles);
       })
       .catch((error) => {
         setError({ error });
       });
-  }, []);
+  }, [topic]);
 
   return (
     <>
@@ -30,18 +31,17 @@ function Football() {
           color="blue"
         ></ReactLoading>
       )}
+      {error && <ErrorPage errorMessage={error.error.message}></ErrorPage>}
       <ul>
-        {ftArticles.map((article) => {
+        {articlesOfTopic.map((article) => {
           return (
             <li className="articlecard-item" key={article.article_id}>
-              {<ArticleCard article={article}></ArticleCard>}
+              <ArticleCard article={article} />
             </li>
           );
         })}
       </ul>
-      {error && <ErrorPage errorMessage={error.error.message} />}
     </>
   );
 }
-
-export default Football;
+export default Topic;

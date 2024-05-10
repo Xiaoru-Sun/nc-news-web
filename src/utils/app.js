@@ -8,8 +8,7 @@ export const fetchAllArticles = (setLoading, sortby, order) => {
   );
 };
 
-export const fetchSingleArtile = (article_id, setLoading) => {
-  setLoading(true);
+export const fetchSingleArtile = (article_id) => {
   return axios.get(
     `https://project-nc-news-xiaoru-sun.onrender.com/api/articles/${article_id}`
   );
