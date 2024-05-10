@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchArticlesByTopic } from "../utils/app";
 import ArticleCard from "./ArticleCard";
 import ReactLoading from "react-loading";
+import ErrorPage from "./ErrorPage";
 
 function Cooking() {
   const [cookingArticles, setCookingArticles] = useState([]);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -15,8 +16,8 @@ function Cooking() {
         setLoading(false);
         setCookingArticles(res.data.articles);
       })
-      .catch((err) => {
-        setError(true);
+      .catch((error) => {
+        setError({ error });
       });
   }, []);
 
@@ -38,7 +39,7 @@ function Cooking() {
           );
         })}
       </ul>
-      {error && <p>Error! Please refresh the page</p>}
+      {error && <ErrorPage errorMessage={error.error.message} />}
     </>
   );
 }

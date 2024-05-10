@@ -2,21 +2,23 @@ import Votes from "./Votes";
 import { UserLoginContext } from "../Contexts/UserLogin";
 import { useContext, useState } from "react";
 import { deleteComment } from "../utils/app";
+import ErrorPage from "./ErrorPage";
+
 function CommentCard(props) {
   const { comment } = props;
 
   const { accountName } = useContext(UserLoginContext);
 
   const [commentDeleted, setCommentDeleted] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleDelete = () => {
     deleteComment(comment.comment_id)
       .then(() => {
         setCommentDeleted(true);
       })
-      .catch((err) => {
-        setError(true);
+      .catch((error) => {
+        setError({ error });
       });
   };
 
@@ -40,6 +42,7 @@ function CommentCard(props) {
         </div>
       )}
       {commentDeleted && <p>comment deleted by user</p>}
+      {error && <ErrorPage errorMessage={error.error.message} />}
     </>
   );
 }

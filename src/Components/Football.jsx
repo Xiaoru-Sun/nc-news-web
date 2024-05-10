@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchArticlesByTopic } from "../utils/app";
 import ArticleCard from "./ArticleCard";
 import ReactLoading from "react-loading";
+import ErrorPage from "./ErrorPage";
+
 function Football() {
   const [ftArticles, setFtArticles] = useState([]);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -14,8 +16,8 @@ function Football() {
         setLoading(false);
         setFtArticles(res.data.articles);
       })
-      .catch((err) => {
-        setError(true);
+      .catch((error) => {
+        setError({ error });
       });
   }, []);
 
@@ -37,7 +39,7 @@ function Football() {
           );
         })}
       </ul>
-      {error && <p>Error! Please refresh the page</p>}
+      {error && <ErrorPage errorMessage={error.error.message} />}
     </>
   );
 }
