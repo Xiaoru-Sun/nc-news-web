@@ -1,10 +1,26 @@
 import { Link, Navigate } from "react-router-dom";
 import { UserLoginContext } from "../Contexts/UserLogin";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 function Header(props) {
   const { setOnLogin } = props;
-  const { userLoggedin, accountName } = useContext(UserLoginContext);
+  const { userLoggedin, setUserLoggedin, account, setAccount } =
+    useContext(UserLoginContext);
+
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+    if (loggedInUser) {
+      console.log(loggedInUser);
+      setAccount(loggedInUser);
+      setUserLoggedin(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setUserLoggedin(false);
+    setAccount({});
+  };
 
   const handleLogin = () => {
     setOnLogin(true);
@@ -31,7 +47,15 @@ function Header(props) {
             </button>
           </Link>
         )}
-        {userLoggedin && <p>Hello {accountName}</p>}
+        {userLoggedin && (
+          <>
+            <span>
+              {/* <p>{account.userName}</p> */}
+              <img className="avatar" src={account.avatar_url}></img>
+            </span>
+            <button onClick={handleLogout}>Log out</button>
+          </>
+        )}
       </header>
     </>
   );
