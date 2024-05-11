@@ -5,6 +5,7 @@ import ReactLoading from "react-loading";
 import { fetchAllArticles } from "../utils/app.js";
 import { useSearchParams } from "react-router-dom";
 import ErrorPage from "./ErrorPage";
+import "./articlelist.css";
 
 function ArticlesList() {
   const [allArticles, setAllArticles] = useState([]);
@@ -12,19 +13,14 @@ function ArticlesList() {
   const [loading, setLoading] = useState(false);
   const [sortby, setSortby] = useState("created_at");
   const [order, setOrder] = useState("DESC");
-  const [query, setQuery] = useState({ sort_by: "created_at", order: "DESC" });
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleQuery = () => {
-    setQuery((preQuery) => ({ ...preQuery, sort_by: sortby, order: order }));
+  useEffect(() => {
     setSearchParams((preParams) => ({
       ...preParams,
       sort_by: sortby,
       order: order,
     }));
-  };
-
-  useEffect(() => {
     fetchAllArticles(setLoading, sortby, order)
       .then((res) => {
         setLoading(false);
@@ -33,7 +29,7 @@ function ArticlesList() {
       .catch((error) => {
         setError({ error });
       });
-  }, [query]);
+  }, [sortby, order]);
 
   return (
     <>
@@ -77,9 +73,6 @@ function ArticlesList() {
             <option>3</option>
           </select>
         </div>
-        <button id="articleslist-apply" onClick={handleQuery}>
-          Apply
-        </button>
       </div>
 
       <ul className="articlecard-container">
