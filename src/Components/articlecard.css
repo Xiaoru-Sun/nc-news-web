@@ -1,0 +1,32 @@
+/*Article Card*/
+.artilecard-title {
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+
+.artilecard-header {
+  font-size: x-small;
+  text-align: left;
+  padding: 0 5px;
+}
+
+#articlecard-topic {
+  font-weight: bold;
+}
+
+.articlecard-buttom {
+  font-size: small;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.articlecard-buttom > button {
+  width: 70px;
+  padding: 5px 0;
+  margin: 0 8px;
+}
