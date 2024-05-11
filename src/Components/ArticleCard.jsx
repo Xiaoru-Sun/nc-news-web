@@ -1,6 +1,7 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Votes from "./Votes";
+import "./articlecard.css";
 
 function ArticleCard(props) {
   const { article } = props;
