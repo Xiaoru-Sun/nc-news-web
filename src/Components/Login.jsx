@@ -6,35 +6,47 @@ import ErrorPage from "./ErrorPage";
 
 function Login(props) {
   const [userName, setUsername] = useState("");
-  const [displayUserName, setDisplayUserName] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const [error, setError] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
-  const { userLoggedin, setUserLoggedin, setAccountName } =
+  const { userLoggedin, setUserLoggedin, setAccount } =
     useContext(UserLoginContext);
   const { setOnLogin } = props;
 
   useEffect(() => {
-    // Check if allUsers is not empty
     if (allUsers.length > 0 && userName) {
-      if (allUsers.includes(userName)) {
+      // Check if allUsers is not empty
+      const matchedUser = allUsers.filter((obj) => obj.username === userName);
+      if (matchedUser) {
         setUserLoggedin(true);
-        setAccountName(userName);
+        const avatar_url = matchedUser[0].avatar_url;
+        setAccount({ userName, userPassword, avatar_url });
         setOnLogin(false);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            userName,
+            userPassword,
+            avatar_url,
+          })
+        );
+
         // Perform actions for valid user
       } else {
-        setError({ error: { message: `${displayUserName} is invalid` } });
+        setError({ error: { message: "invalid username or password" } });
         // Perform actions for invalid user
       }
     }
   }, [allUsers, userName]);
 
-  const handleSignIn = () => {
+  const handleSignIn = (e) => {
+    e.preventDefault();
     axios
       .get(`https://project-nc-news-xiaoru-sun.onrender.com/api/users`)
       .then((res) => {
-        let allNames = res.data.users.map((obj) => obj.username);
+        // let allNames = res.data.users.map((obj) => obj.username);
         setAllUsers((preAllUsers) => {
-          const currAllUsers = [...preAllUsers, ...allNames];
+          const currAllUsers = [...preAllUsers, ...res.data.users];
           return currAllUsers;
         });
       })
@@ -56,27 +68,42 @@ function Login(props) {
     <div id="signin-container">
       <section id="signin-section">
         <h2 id="signin-h2">Sign In</h2>
-        <form>
-          <label id="signin-label">Username</label>
+        <form
+          onSubmit={(e) => {
+            handleSignIn(e);
+          }}
+        >
+          <label className="signin-label" htmlFor="username">
+            Username
+          </label>
           <input
-            id="signin-input"
+            className="signin-input"
             type="text"
             value={userName}
+            autoComplete="current-username"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
+            placeholder="username"
+          ></input>
+          <label className="signin-label" htmlFor="username">
+            Password
+          </label>
+          <input
+            className="signin-input"
+            type="password"
+            value={userPassword}
+            autoComplete="current-password"
+            onChange={(e) => {
+              setUserPassword(e.target.value);
+            }}
+            placeholder="password"
           ></input>
 
-          <button
-            id="signin-button"
-            type="button"
-            onClick={() => {
-              setDisplayUserName(userName);
-              handleSignIn();
-            }}
-          >
+          <button id="signin-button" type="submit">
             Continue
           </button>
+
           <p id="signin-policy">
             By continuing, you agree to NC marketplace's{" "}
             <a>Conditions of Use & Sale</a>. Please see our{" "}
