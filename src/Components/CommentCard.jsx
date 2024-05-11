@@ -7,7 +7,7 @@ import ErrorPage from "./ErrorPage";
 function CommentCard(props) {
   const { comment } = props;
 
-  const { accountName } = useContext(UserLoginContext);
+  const { account } = useContext(UserLoginContext);
 
   const [commentDeleted, setCommentDeleted] = useState(false);
   const [error, setError] = useState(null);
@@ -29,7 +29,7 @@ function CommentCard(props) {
           <p>{comment.comment_id}</p>
           <p>{comment.author}</p>
           <p>{comment.body}</p>
-          {accountName === comment.author && (
+          {account.userName === comment.author && (
             <button
               disabled={commentDeleted}
               onClick={() => {

@@ -14,7 +14,7 @@ function CommentList(props) {
   const [commentInput, setCommentInput] = useState("");
   const [userNameInput, setUserNameInput] = useState("");
   const [postCommentTimes, setPostCommentTimes] = useState(0);
-  const { userLoggedin, accountName } = useContext(UserLoginContext);
+  const { userLoggedin, account } = useContext(UserLoginContext);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function CommentList(props) {
       setIsOpen(true);
     } else {
       setShowCommentInput(true);
-      setUserNameInput(accountName);
+      setUserNameInput(account.userName);
     }
   };
 
