@@ -32,7 +32,7 @@ function Topic(props) {
         ></ReactLoading>
       )}
       {error && <ErrorPage errorMessage={error.error.message}></ErrorPage>}
-      <ul>
+      <ul style={{ margin: 0, padding: 0 }}>
         {articlesOfTopic.map((article) => {
           return (
             <li className="articlecard-item" key={article.article_id}>
