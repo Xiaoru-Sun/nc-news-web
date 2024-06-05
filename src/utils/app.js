@@ -56,5 +56,5 @@ export const fetchArticlesByTopic = (topic) => {
 };
 
 export const fetchAllUsers = () => {
-  return axios.get(`https://project-nc-news-xiaoru-sun.onrender.com/api/users`);
+  return axios.get("https://project-nc-news-xiaoru-sun.onrender.com/api/users");
 };

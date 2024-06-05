@@ -186,7 +186,6 @@ img {
 /* Login*/
 #signin-section {
   background-color: whitesmoke;
-  width: 300px;
   padding: 20px;
   margin-top: 20px;
   font-family: Arial, Helvetica, sans-serif;
@@ -196,9 +195,8 @@ img {
 
 #signin-button {
   background-color: rgb(248, 160, 8);
-  height: 30px;
-  width: 240px;
-  padding: 8px;
+  height: 28px;
+  padding: 5px;
   margin-top: 15px;
   font-size: small;
 }
@@ -214,11 +212,6 @@ img {
   display: block;
   margin-left: 0;
   height: 20px;
-}
-
-#signin-policy {
-  font-size: xx-small;
-  width: 240px;
 }
 
 #signin-h2 {

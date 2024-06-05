@@ -1,64 +1,38 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserLoginContext } from "../Contexts/UserLogin";
 import ErrorPage from "./ErrorPage";
+import { fetchAllUsers } from "../utils/app";
 
 function Login(props) {
-  const [userName, setUsername] = useState("");
-  const [userPassword, setUserPassword] = useState("");
+  const [pickedUser, setPickedUser] = useState({ username: "", name: "" });
   const [error, setError] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const { userLoggedin, setUserLoggedin, setAccount } =
     useContext(UserLoginContext);
   const { setOnLogin } = props;
 
-  useEffect(() => {
-    if (allUsers.length > 0 && userName) {
-      // Check if allUsers is not empty
-      const matchedUser = allUsers.filter((obj) => obj.username === userName);
-      if (matchedUser) {
-        setUserLoggedin(true);
-        const avatar_url = matchedUser[0].avatar_url;
-        setAccount({ userName, userPassword, avatar_url });
-        setOnLogin(false);
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            userName,
-            userPassword,
-            avatar_url,
-          })
-        );
-
-        // Perform actions for valid user
-      } else {
-        setError({ error: { message: "invalid username or password" } });
-        // Perform actions for invalid user
-      }
-    }
-  }, [allUsers, userName]);
-
   const handleSignIn = (e) => {
     e.preventDefault();
-    axios
-      .get(`https://project-nc-news-xiaoru-sun.onrender.com/api/users`)
+    setUserLoggedin(true);
+    localStorage.setItem("user", JSON.stringify(pickedUser));
+    setOnLogin(false);
+  };
+
+  useEffect(() => {
+    fetchAllUsers()
       .then((res) => {
-        // let allNames = res.data.users.map((obj) => obj.username);
-        setAllUsers((preAllUsers) => {
-          const currAllUsers = [...preAllUsers, ...res.data.users];
-          return currAllUsers;
-        });
+        setAllUsers(res.data.users);
       })
       .catch((error) => {
         setError({ error });
       });
-  };
+  }, []);
 
   if (userLoggedin) {
     return (
       <>
-        <p>{userName} is signed in!</p>
+        <p>{pickedUser.username} is signed in!</p>
         <Navigate to="/" />
       </>
     );
@@ -67,49 +41,111 @@ function Login(props) {
   return (
     <div id="signin-container">
       <section id="signin-section">
-        <h2 id="signin-h2">Sign In</h2>
+        {allUsers.length ? (
+          <ol
+            start={0}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              height: "125px",
+              padding: "0",
+              marginBottom: "20px",
+              justifyContent: "space-around",
+            }}
+          >
+            {allUsers.map((user, index) => {
+              return (
+                <li
+                  key={index}
+                  style={{
+                    textAlign: "center",
+                    flexGrow: 1,
+                    flexShrink: 1,
+                    flexBasis: 0,
+                    listStyle: "none",
+                    minWidth: "0",
+                    backgroundColor: "white",
+                    marginLeft: "5px",
+                    marginRight: "5px",
+                    padding: "5px",
+                  }}
+                  onClick={() => {
+                    setPickedUser(user);
+                  }}
+                >
+                  <img
+                    alt={`avartar image of the user ${user.username}`}
+                    src={user.avatar_url}
+                    style={{
+                      height: "75%",
+                    }}
+                  ></img>
+                  <p
+                    style={{
+                      height: "5%",
+                      fontSize: "x-small",
+                      margin: "0",
+                    }}
+                  >
+                    {user.name}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
+        ) : null}
+        <p
+          id="signin-h2"
+          style={{
+            color: "rgba(15, 2, 2, 0.87)",
+          }}
+        >
+          Pick an user to log in
+        </p>
         <form
+          style={{ marginTop: "20px" }}
           onSubmit={(e) => {
             handleSignIn(e);
           }}
         >
-          <label className="signin-label" htmlFor="username">
-            Username
-          </label>
+          {/* <label className="signin-label" htmlFor="username">
+            UserName
+          </label> */}
           <input
             className="signin-input"
             type="text"
-            value={userName}
+            defaultValue={pickedUser.username}
             autoComplete="current-username"
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
             placeholder="username"
+            style={{
+              padding: "3px",
+              marginTop: "10px",
+              marginBottom: "10px",
+              marginRight: "20px",
+              maxWidth: "90px",
+              borderRadius: "7px",
+            }}
           ></input>
-          <label className="signin-label" htmlFor="username">
-            Password
-          </label>
+          {/* <label className="signin-label" htmlFor="name">
+            Name
+          </label> */}
           <input
             className="signin-input"
-            type="password"
-            value={userPassword}
+            type="text"
+            defaultValue={pickedUser.name}
             autoComplete="current-password"
-            onChange={(e) => {
-              setUserPassword(e.target.value);
+            placeholder="name"
+            style={{
+              padding: "3px",
+              maxWidth: "90px",
+              marginRight: "20px",
+              borderRadius: "7px",
             }}
-            placeholder="password"
           ></input>
 
           <button id="signin-button" type="submit">
             Continue
           </button>
-
-          <p id="signin-policy">
-            By continuing, you agree to NC marketplace's{" "}
-            <a>Conditions of Use & Sale</a>. Please see our{" "}
-            <a>Privacy Notice</a>, our <a>Cookies Notice</a> and{" "}
-            <a>our Interest-Based Ads Notice</a>.
-          </p>
         </form>
       </section>
       {error && <ErrorPage errorMessage={error.error.message} />}
