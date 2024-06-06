@@ -5,19 +5,17 @@ import ErrorPage from "./ErrorPage";
 import { fetchAllUsers } from "../utils/app";
 import "./login.css";
 
-function Login(props) {
+function Login() {
   const [pickedUser, setPickedUser] = useState({ username: "", name: "" });
   const [error, setError] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const { userLoggedin, setUserLoggedin, setAccount } =
     useContext(UserLoginContext);
-  const { setOnLogin } = props;
 
   const handleSignIn = (e) => {
     e.preventDefault();
     localStorage.setItem("user", JSON.stringify(pickedUser));
     setUserLoggedin(true);
-    setOnLogin(false);
   };
 
   useEffect(() => {
