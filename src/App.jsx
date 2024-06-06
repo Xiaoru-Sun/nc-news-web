@@ -1,33 +1,26 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./Components/Header";
 import ArticlesList from "./Components/ArticlesList";
 import Home from "./Components/Home";
 import Navigator from "./Components/Navigator";
 import Login from "./Components/Login";
-// import Coding from "./Components/Coding";
-// import Cooking from "./Components/Cooking";
-// import Football from "./Components/Football";
 import Topic from "./Components/Topic";
-import { useState } from "react";
 import SingleArticle from "./Components/SingleArticle";
 import { UserLoginProvider } from "./Contexts/UserLogin";
 import ErrorPage from "./Components/ErrorPage";
 
 function App() {
-  const [onLogin, setOnLogin] = useState(false);
+  const location = useLocation();
 
   return (
     <>
       <UserLoginProvider>
-        {!onLogin && <Header setOnLogin={setOnLogin}></Header>}
-        {!onLogin && <Navigator></Navigator>}
+        {location.pathname !== "/log-in" && <Header></Header>}
+        {location.pathname !== "/log-in" && <Navigator></Navigator>}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/articles" element={<ArticlesList />}></Route>
-          <Route
-            path="/log-in"
-            element={<Login setOnLogin={setOnLogin} />}
-          ></Route>
+          <Route path="/log-in" element={<Login />}></Route>
           <Route
             path="/articles/:article_id"
             element={<SingleArticle />}
