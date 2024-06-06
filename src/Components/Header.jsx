@@ -3,8 +3,7 @@ import { UserLoginContext } from "../Contexts/UserLogin";
 import { useContext, useEffect } from "react";
 import "./header.css";
 
-function Header(props) {
-  const { setOnLogin } = props;
+function Header() {
   const { userLoggedin, setUserLoggedin, account, setAccount } =
     useContext(UserLoginContext);
 
@@ -24,7 +23,6 @@ function Header(props) {
   };
 
   const handleLogin = () => {
-    setOnLogin(true);
     <Navigate to="/log-in"></Navigate>;
   };
 
