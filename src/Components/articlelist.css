@@ -4,16 +4,6 @@
   background-color: rgb(231, 227, 227);
 }
 
-.articlecard-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
 .articlelist-flex {
   display: flex;
   flex-direction: row;
@@ -36,6 +26,16 @@
 #articleslist-apply {
   height: 30px;
   font-size: small;
+}
+
+.articlecard-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .articlecard-item {

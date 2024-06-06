@@ -1,0 +1,17 @@
+.topic-flex {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.topic-flexitem {
+  flex: auto;
+  width: 100%;
+  max-width: 450px;
+  padding: 0 10px;
+  margin: 20px auto;
+  border: 1px solid green;
+}

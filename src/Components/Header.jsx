@@ -1,6 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import { UserLoginContext } from "../Contexts/UserLogin";
 import { useContext, useEffect } from "react";
+import "./header.css";
 
 function Header(props) {
   const { setOnLogin } = props;
@@ -30,32 +31,51 @@ function Header(props) {
   return (
     <>
       <header>
-        <Link id="nostalgia" to="/" onClick={() => {}}>
+        <div className="header-flexitem">
           <h3 className="tooltip">
-            NC NostalgiaNews
+            <Link className="h3-link" to="/" onClick={() => {}}>
+              NC NostalgiaNews
+            </Link>
             <span className="tooltiptext">Go to Homepage</span>
           </h3>
-        </Link>
-        {!userLoggedin && (
-          <Link to="/log-in">
+        </div>
+        <div className="header-flexitem img-button-container">
+          {userLoggedin ? (
             <button
+              className="login-button"
               type="button"
-              id="header-signin"
-              onClick={() => handleLogin()}
+              onClick={() => {
+                handleLogout();
+              }}
             >
-              Log In
+              Log Out
             </button>
-          </Link>
-        )}
-        {userLoggedin && (
-          <>
+          ) : (
+            <Link to="/log-in">
+              <button
+                className="login-button"
+                type="button"
+                onClick={() => {
+                  handleLogin();
+                }}
+              >
+                Log In
+              </button>
+            </Link>
+          )}
+
+          {userLoggedin ? (
+            <>
+              <span className="img-button-container-span">
+                <img className="avatar" src={account.avatar_url}></img>
+              </span>
+            </>
+          ) : (
             <span>
-              {/* <p>{account.userName}</p> */}
-              <img className="avatar" src={account.avatar_url}></img>
+              <img className="atar"></img>
             </span>
-            <button onClick={handleLogout}>Log out</button>
-          </>
-        )}
+          )}
+        </div>
       </header>
     </>
   );

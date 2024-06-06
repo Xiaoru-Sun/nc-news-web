@@ -15,8 +15,8 @@ function Login(props) {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    setUserLoggedin(true);
     localStorage.setItem("user", JSON.stringify(pickedUser));
+    setUserLoggedin(true);
     setOnLogin(false);
   };
 
@@ -78,6 +78,7 @@ function Login(props) {
             defaultValue={pickedUser.username}
             autoComplete="current-username"
             placeholder="username"
+            required
           ></input>
           <input
             className="login-name"
@@ -85,6 +86,7 @@ function Login(props) {
             defaultValue={pickedUser.name}
             autoComplete="current-password"
             placeholder="name"
+            required
           ></input>
 
           <button id="signin-button" type="submit">

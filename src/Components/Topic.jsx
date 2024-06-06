@@ -3,6 +3,7 @@ import { fetchArticlesByTopic } from "../utils/app";
 import ReactLoading from "react-loading";
 import ArticleCard from "./ArticleCard";
 import ErrorPage from "./ErrorPage";
+import "./topic.css";
 
 function Topic(props) {
   const { topic } = props;
@@ -32,10 +33,10 @@ function Topic(props) {
         ></ReactLoading>
       )}
       {error && <ErrorPage errorMessage={error.error.message}></ErrorPage>}
-      <ul style={{ margin: 0, padding: 0 }}>
+      <ul className="topic-flex">
         {articlesOfTopic.map((article) => {
           return (
-            <li className="articlecard-item" key={article.article_id}>
+            <li className="topic-flexitem" key={article.article_id}>
               <ArticleCard article={article} />
             </li>
           );
