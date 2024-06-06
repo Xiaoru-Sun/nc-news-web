@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { UserLoginContext } from "../Contexts/UserLogin";
 import ErrorPage from "./ErrorPage";
 import { fetchAllUsers } from "../utils/app";
+import "./login.css";
 
 function Login(props) {
   const [pickedUser, setPickedUser] = useState({ username: "", name: "" });
@@ -41,34 +42,14 @@ function Login(props) {
   return (
     <div id="signin-container">
       <section id="signin-section">
+        <p className="pickuser-text">Choose An User To Log In</p>
         {allUsers.length ? (
-          <ol
-            start={0}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              height: "125px",
-              padding: "0",
-              marginBottom: "20px",
-              justifyContent: "space-around",
-            }}
-          >
+          <ol start={0} className="flex-container">
             {allUsers.map((user, index) => {
               return (
                 <li
                   key={index}
-                  style={{
-                    textAlign: "center",
-                    flexGrow: 1,
-                    flexShrink: 1,
-                    flexBasis: 0,
-                    listStyle: "none",
-                    minWidth: "0",
-                    backgroundColor: "white",
-                    marginLeft: "5px",
-                    marginRight: "5px",
-                    padding: "5px",
-                  }}
+                  className="flex-item"
                   onClick={() => {
                     setPickedUser(user);
                   }}
@@ -76,71 +57,34 @@ function Login(props) {
                   <img
                     alt={`avartar image of the user ${user.username}`}
                     src={user.avatar_url}
-                    style={{
-                      height: "75%",
-                    }}
+                    className="avatar-img"
                   ></img>
-                  <p
-                    style={{
-                      height: "5%",
-                      fontSize: "x-small",
-                      margin: "0",
-                    }}
-                  >
-                    {user.name}
-                  </p>
+                  <p className="username">{user.name}</p>
                 </li>
               );
             })}
           </ol>
         ) : null}
-        <p
-          id="signin-h2"
-          style={{
-            color: "rgba(15, 2, 2, 0.87)",
-          }}
-        >
-          Pick an user to log in
-        </p>
+
         <form
-          style={{ marginTop: "20px" }}
+          className="form"
           onSubmit={(e) => {
             handleSignIn(e);
           }}
         >
-          {/* <label className="signin-label" htmlFor="username">
-            UserName
-          </label> */}
           <input
-            className="signin-input"
+            className="login-username"
             type="text"
             defaultValue={pickedUser.username}
             autoComplete="current-username"
             placeholder="username"
-            style={{
-              padding: "3px",
-              marginTop: "10px",
-              marginBottom: "10px",
-              marginRight: "20px",
-              maxWidth: "90px",
-              borderRadius: "7px",
-            }}
           ></input>
-          {/* <label className="signin-label" htmlFor="name">
-            Name
-          </label> */}
           <input
-            className="signin-input"
+            className="login-name"
             type="text"
             defaultValue={pickedUser.name}
             autoComplete="current-password"
             placeholder="name"
-            style={{
-              padding: "3px",
-              maxWidth: "90px",
-              marginRight: "20px",
-              borderRadius: "7px",
-            }}
           ></input>
 
           <button id="signin-button" type="submit">

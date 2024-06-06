@@ -183,45 +183,6 @@ img {
   font-size: small;
 } */
 
-/* Login*/
-#signin-section {
-  background-color: whitesmoke;
-  padding: 20px;
-  margin-top: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: left;
-  border: 15px;
-}
-
-#signin-button {
-  background-color: rgb(248, 160, 8);
-  height: 28px;
-  padding: 5px;
-  margin-top: 15px;
-  font-size: small;
-}
-
-#signin-label {
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 0;
-}
-#signin-input {
-  margin-left: 10px;
-  width: 230px;
-  display: block;
-  margin-left: 0;
-  height: 20px;
-}
-
-#signin-h2 {
-  margin: 0px auto 10px auto;
-}
-
-.loading {
-  text-align: center;
-}
-
 /* CommentList, CommentCard*/
 
 .commentcard-container {
