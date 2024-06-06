@@ -19,6 +19,7 @@
   flex-direction: start;
   flex-wrap: wrap;
   align-items: center;
+  margin: 30px auto 10px auto;
 }
 
 .articlelist-label {

@@ -55,14 +55,14 @@ function ArticlesList() {
           </select>
         </div>
         <div>
-          <label>Order</label>
+          <label className="articlelist-label">Order</label>
           <select
             onChange={(e) => {
               setOrder(e.target.value);
             }}
           >
-            <option value="DESC">DESC</option>
-            <option value="ASC">ASC</option>
+            <option value="DESC">Descending</option>
+            <option value="ASC">Ascending</option>
           </select>
         </div>
         <div className="articleslist-query page">
