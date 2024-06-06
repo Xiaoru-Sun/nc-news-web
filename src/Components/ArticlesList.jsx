@@ -41,8 +41,8 @@ function ArticlesList() {
         ></ReactLoading>
       )}
 
-      <div className="articlelist-top">
-        <div className="articleslist-query sort-by">
+      <div className="articlelist-flex">
+        <div className="articlelist-flexitem sort-by">
           <label className="articlelist-label">Sort by</label>
           <select
             onChange={(e) => {
@@ -54,7 +54,7 @@ function ArticlesList() {
             <option value="comment_count">Comments</option>
           </select>
         </div>
-        <div>
+        <div className="articlelist-flexitem">
           <label className="articlelist-label">Order</label>
           <select
             onChange={(e) => {
@@ -65,7 +65,7 @@ function ArticlesList() {
             <option value="ASC">Ascending</option>
           </select>
         </div>
-        <div className="articleslist-query page">
+        <div className="articlelist-flexitem page">
           <label className="articlelist-label">Page</label>
           <select>
             <option>1</option>

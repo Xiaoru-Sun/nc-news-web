@@ -14,22 +14,23 @@
   padding: 0;
 }
 
-.articlelist-top {
+.articlelist-flex {
   display: flex;
-  flex-direction: start;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   margin: 30px auto 10px auto;
+}
+
+.articlelist-flexitem {
+  margin-right: auto;
 }
 
 .articlelist-label {
   font-size: small;
   padding: 0 2px;
   margin-right: 5px;
-}
-
-.articlelist-top > .page {
-  margin: 0 20px;
+  font-weight: bold;
 }
 
 #articleslist-apply {
