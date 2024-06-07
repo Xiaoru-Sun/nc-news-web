@@ -7,11 +7,15 @@ Tech Stack
 * JavaScript (Node.js)
 * Styled-components
 * Axios
-  
+
 Features
 * Article Interaction: Users can post articles on different topics, upvote or downvote articles and comments based on their preference.
 * Comment Management: Users can add comments to articles, with the ability to upvote or downvote them.
-  
+
+Live Projects Links:
+Frontend: https://xrs-news.netlify.app/
+Backend: https://project-nc-news-xiaoru-sun.onrender.com/api
+
 Note
 This project is hosted on Netlify's free tier. The server may take up to a minute to spin up if it has been inactive. Subsequent interactions should be instantaneous.
 
