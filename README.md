@@ -1,8 +1,24 @@
-# React + Vite
+NC-News Frontend Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project was created as part of the Northcoders software development bootcamp. It features a front-end application for a news system similar to Reddit, where users can post articles on various topics, comment on articles, and vote or downvote on articles.
 
-Currently, two official plugins are available:
+Tech Stack
+* React.js
+* JavaScript (Node.js)
+* Styled-components
+* Axios
+  
+Features
+* Article Interaction: Users can post articles on different topics, upvote or downvote articles and comments based on their preference.
+* Comment Management: Users can add comments to articles, with the ability to upvote or downvote them.
+  
+Note
+This project is hosted on Netlify's free tier. The server may take up to a minute to spin up if it has been inactive. Subsequent interactions should be instantaneous.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Local Setup Instructions
+1. Clone the repository: git clone git@github.com:Xiaoru-Sun/nc-news.git
+2. Navigate to the repository: cd nc-news
+3. Install the dependencies: npm install
+4. Run the application locally: npm run dev
+
+* Node.js: Minimum version v21.5.0
