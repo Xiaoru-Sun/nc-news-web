@@ -10,7 +10,6 @@ function Header() {
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
     if (loggedInUser) {
-      console.log(loggedInUser);
       setAccount(loggedInUser);
       setUserLoggedin(true);
     }

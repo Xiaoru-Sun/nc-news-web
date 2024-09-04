@@ -65,14 +65,14 @@ function ArticlesList() {
             <option value="ASC">Ascending</option>
           </select>
         </div>
-        <div className="articlelist-flexitem page">
+        {/* <div className="articlelist-flexitem page">
           <label className="articlelist-label">Page</label>
           <select>
             <option>1</option>
             <option>2</option>
             <option>3</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       <ul className="articlecard-container">
