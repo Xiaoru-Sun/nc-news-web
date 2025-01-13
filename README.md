@@ -13,7 +13,7 @@ Features
 * Comment Management: Users can add comments to articles, with the ability to upvote or downvote them.
 
 Live Projects Links:
-Frontend: https://xrs-news.netlify.app/
+Frontend: snapsnap-news.netlify.app
 Backend: https://project-nc-news-xiaoru-sun.onrender.com/api
 
 Note
