@@ -1,6 +1,6 @@
 
 ## Snap News Web
-A reddit clone app
+A Reddit clone app that allows users to post articles, comment, and vote on content
 
 ## __Link to the hosted version__
 [snapsnap-news.netlify.app](snapsnap-news.netlify.app) <br>
