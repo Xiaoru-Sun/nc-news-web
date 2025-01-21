@@ -3,8 +3,7 @@
 A reddit clone app
 
 ## __Link to the hosted version__
-snapsnap-news.netlify.app  
-
+snapsnap-news.netlify.app<br>
 [Backend](https://project-nc-news-xiaoru-sun.onrender.com/api)
 
 ## __Introduction__
