@@ -3,7 +3,8 @@
 A reddit clone app
 
 ## __Link to the hosted version__
-snapsnap-news.netlify.app
+snapsnap-news.netlify.app  
+
 [Backend](https://project-nc-news-xiaoru-sun.onrender.com/api)
 
 ## __Introduction__
@@ -60,7 +61,8 @@ If you have a suggestion that would make this better, please fork the repo and c
 7. Push your changes to the branch(git push origin feature/AmazingFeature)
 8. Submit a pull request
 
+Node.js: Minimum version v21.5.0
+
 Note
 This project is hosted on Netlify's free tier. The server may take up to a minute to spin up if it has been inactive. Subsequent interactions should be instantaneous.
 
-* Node.js: Minimum version v21.5.0
