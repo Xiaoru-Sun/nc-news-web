@@ -3,8 +3,8 @@
 A Reddit clone app that allows users to post articles, comment, and vote on content
 
 ## __Link to the hosted version__
-[snapsnap-news.netlify.app](snapsnap-news.netlify.app) <br>
-[Backend API ](https://project-nc-news-xiaoru-sun.onrender.com/api)
++ Website: [snapsnap-news.netlify.app](snapsnap-news.netlify.app) <br>
++ Backend API: [Backend API ](https://project-nc-news-xiaoru-sun.onrender.com/api)
 
 ## __Introduction__
 This project was created as part of the Northcoders software development bootcamp. It features a front-end application for a news system similar to Reddit, where users can post articles on various topics, comment on articles, and vote or downvote articles and comments.
@@ -49,7 +49,7 @@ Before you can run or contribute to this project, make sure you have node instal
    npm start
    ```
 
-## **Contributing**
+## Contributing
 If you have a suggestion that would make this better, please fork the repo and create a pull request. Thanks!
 1. Fork the repository
 2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
@@ -60,7 +60,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 7. Push your changes to the branch(git push origin feature/AmazingFeature)
 8. Submit a pull request
 
-Node.js: Minimum version v21.5.0
+#### Node.js: Minimum version v21.5.0
 
 Note
 This project is hosted on Netlify's free tier. The server may take up to a minute to spin up if it has been inactive. Subsequent interactions should be instantaneous.
