@@ -3,8 +3,8 @@
 A reddit clone app
 
 ## __Link to the hosted version__
-snapsnap-news.netlify.app<br>
-[Backend](https://project-nc-news-xiaoru-sun.onrender.com/api)
+[snapsnap-news.netlify.app](snapsnap-news.netlify.app)
+[Backend API ](https://project-nc-news-xiaoru-sun.onrender.com/api)
 
 ## __Introduction__
 This project was created as part of the Northcoders software development bootcamp. It features a front-end application for a news system similar to Reddit, where users can post articles on various topics, comment on articles, and vote or downvote articles and comments.
